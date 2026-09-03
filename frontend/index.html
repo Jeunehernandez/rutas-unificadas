@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Validador de Rutas Unificadas</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="encabezado">
+    <h1>Validador de Rutas Unificadas</h1>
+    <p>Sube el Excel de transporte y aplica automáticamente la regla 100&nbsp;% / 50&nbsp;%.</p>
+  </header>
+
+  <main class="contenedor">
+
+    <form id="form-subida" class="tarjeta">
+      <label for="archivo" class="etiqueta-archivo">
+        <span id="texto-archivo">Selecciona o arrastra el Excel (.xlsx)</span>
+        <input type="file" id="archivo" name="archivo" accept=".xlsx,.xls" />
+      </label>
+
+      <button type="submit" id="boton-procesar">Procesar archivo</button>
+
+      <p id="estado" class="estado"></p>
+    </form>
+
+    <section id="resultado" class="tarjeta" hidden>
+      <h2>Resultado</h2>
+
+      <dl class="metricas">
+        <div><dt>Servicios totales</dt><dd id="m-total">-</dd></div>
+        <div><dt>Servicios unificados</dt><dd id="m-unificados">-</dd></div>
+        <div><dt>Grupos unificados</dt><dd id="m-grupos">-</dd></div>
+        <div><dt>Costo original</dt><dd id="m-original">-</dd></div>
+        <div><dt>Costo ajustado</dt><dd id="m-ajustado">-</dd></div>
+        <div><dt>Ahorro</dt><dd id="m-ahorro">-</dd></div>
+        <div><dt>% de ahorro</dt><dd id="m-porcentaje">-</dd></div>
+      </dl>
+
+      <a id="enlace-descarga" class="boton-descarga" href="#" download>Descargar Excel validado</a>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
