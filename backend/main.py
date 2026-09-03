@@ -3,7 +3,7 @@ import urllib.parse
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import RedirectResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
 from backend import procesador
@@ -93,5 +93,12 @@ async def procesar(archivo: UploadFile = File(...)):
     )
 
 
-# Sirve el frontend en http://127.0.0.1:8000/app
+@app.get("/app")
+def redirigir_a_app():
+    # Sin esto, entrar a "/app" (sin la barra final) da "Not Found",
+    # porque los archivos estáticos quedan montados en "/app/".
+    return RedirectResponse(url="/app/")
+
+
+# Sirve el frontend en http://127.0.0.1:8000/app/
 app.mount("/app", StaticFiles(directory="frontend", html=True), name="frontend")
