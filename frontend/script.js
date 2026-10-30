@@ -18,6 +18,47 @@ entradaArchivo.addEventListener("change", () => {
   }
 });
 
+// Arrastrar y soltar: el input está oculto, así que la zona de arrastre es la etiqueta.
+const zonaArrastre = document.querySelector(".etiqueta-archivo");
+
+// Evita que el navegador abra el archivo si se suelta fuera de la zona.
+["dragover", "drop"].forEach((tipo) => {
+  window.addEventListener(tipo, (evento) => evento.preventDefault());
+});
+
+["dragenter", "dragover"].forEach((tipo) => {
+  zonaArrastre.addEventListener(tipo, (evento) => {
+    evento.preventDefault();
+    zonaArrastre.classList.add("arrastrando");
+  });
+});
+
+["dragleave", "drop"].forEach((tipo) => {
+  zonaArrastre.addEventListener(tipo, () => {
+    zonaArrastre.classList.remove("arrastrando");
+  });
+});
+
+zonaArrastre.addEventListener("drop", (evento) => {
+  evento.preventDefault();
+
+  const archivo = evento.dataTransfer.files[0];
+  if (!archivo) {
+    return;
+  }
+
+  if (!/\.xlsx?$/i.test(archivo.name)) {
+    mostrarEstado("El archivo debe ser un Excel (.xlsx o .xls).", "error");
+    return;
+  }
+
+  const transferencia = new DataTransfer();
+  transferencia.items.add(archivo);
+  entradaArchivo.files = transferencia.files;
+  entradaArchivo.dispatchEvent(new Event("change"));
+  mostrarEstado("", "");
+});
+
 formulario.addEventListener("submit", async (evento) => {
   evento.preventDefault();
 
