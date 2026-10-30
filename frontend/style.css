@@ -19,11 +19,26 @@ body {
   color: var(--texto);
 }
 
+/* Azul a la izquierda (título) y blanco a la derecha (logo), con corte diagonal */
 .encabezado {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.encabezado-texto {
   background: var(--azul);
   color: white;
-  padding: 28px 24px;
-  text-align: center;
+  padding: 28px 110px 28px 32px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 80px) 100%, 0 100%);
+}
+
+.encabezado-logo {
+  align-self: center;
+  height: 72px;
+  margin: 12px 32px 12px 16px;
 }
 
 .encabezado h1 {
@@ -151,4 +166,20 @@ body {
 
 .boton-descarga:hover {
   filter: brightness(1.1);
+}
+
+@media (max-width: 600px) {
+  .encabezado-texto {
+    padding: 20px 60px 20px 16px;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 0 100%);
+  }
+
+  .encabezado h1 {
+    font-size: 1.25rem;
+  }
+
+  .encabezado-logo {
+    height: 44px;
+    margin: 8px 16px 8px 8px;
+  }
 }
