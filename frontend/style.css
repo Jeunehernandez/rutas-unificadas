@@ -65,7 +65,8 @@ body {
   transition: border-color 0.15s ease;
 }
 
-.etiqueta-archivo:hover {
+.etiqueta-archivo:hover,
+.etiqueta-archivo.arrastrando {
   border-color: var(--azul);
 }
 
